@@ -320,13 +320,13 @@ await mainPrompt();
 
 
 
-async function findAll() {
+async function fetchSevenDays() {
     try{
         await client.connect();
         const database = client.db('timekeeperdb');
         const punches = database.collection('timekeepercollection');
 
-        const allEntries = await punches.find();
+        const allEntries = await punches.find().sort({date:-1}).limit(7);
 
         for await (const doc of allEntries){
             console.log(doc);
@@ -337,4 +337,4 @@ async function findAll() {
     }
 }
 
-// await findAll().catch(console.dir);
+await fetchSevenDays().catch(console.dir);
