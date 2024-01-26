@@ -176,7 +176,6 @@ async function startTimer(){
     // make a little function for random sign offs - time started, carpe codex || time started, once more unto the breach!
 
     try {
-        // Connect to the "insertDB" database and access its "haiku" collection
         await client.connect();
         const database = client.db('timekeeperdb');
         const punches = database.collection('timekeepercollection');
@@ -193,10 +192,7 @@ async function startTimer(){
           tags: null,
           notes: null
         }
-        // Insert the defined document into the "haiku" collection
-        const result = await punches.insertOne(doc);
-        // Print the ID of the inserted document
-        console.log(`A document was inserted with the _id: ${result.insertedId}`);
+        
         console.log(chalk.green('Timer started, happy coding'));
       } catch (error){
         console.error(error);
